@@ -17,3 +17,6 @@ Template for full-stack Web development in Rust using Warp and Maud with HTTPS s
 - [ ] User registration (Partial)
 - [x] Static assets
 - [x] Blog
+
+### How to use?
+See [SETUP.md](SETUP.md) for instructions on how to set up the project.

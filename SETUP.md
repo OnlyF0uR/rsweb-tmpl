@@ -7,7 +7,7 @@ Either use a self-signed certificate or a certificate from a trusted CA. For the
 
 ```bash
 docker run -d --name stack-redis -p 6379:6379 redis:latest
-docker run -d --name stack-timescale -p 5432:5432 -e POSTGRES_PASSWORD=password timescale/timescaledb-ha:pg16
+docker run -d --name stack-timescale -p 5432:5432 -e POSTGRES_PASSWORD=<password> timescale/timescaledb-ha:pg16
 ```
 
 Migrations and seeding can be done using the following command (--sim for simulating):
