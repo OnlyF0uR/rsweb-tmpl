@@ -1,0 +1,11 @@
+[package]
+name = "rsweb-database"
+version.workspace = true
+edition = "2024"
+publish = false
+
+[dependencies]
+sqlx.workspace = true
+tokio.workspace = true
+serde.workspace = true
+rsweb-utils.workspace = true

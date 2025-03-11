@@ -1,0 +1,22 @@
+[package]
+name = "rsweb-api"
+version.workspace = true
+edition = "2024"
+publish = false
+
+[dependencies]
+warp.workspace = true
+serde.workspace = true
+rsweb-auth.workspace = true
+google-jwt.workspace = true
+rsweb-database.workspace = true
+rsweb-crypto.workspace = true
+rsweb-utils.workspace = true
+futures.workspace = true
+bytes.workspace = true
+sqlx.workspace = true
+reqwest.workspace = true
+serde_json.workspace = true
+rsweb-cache.workspace = true
+deadpool-redis.workspace = true
+tokio.workspace = true

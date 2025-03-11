@@ -1,0 +1,13 @@
+[package]
+name = "rsweb-auth"
+version.workspace = true
+edition = "2024"
+publish = false
+
+[dependencies]
+base64.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+rsweb-crypto.workspace = true
+rsweb-database.workspace = true
+reqwest.workspace = true

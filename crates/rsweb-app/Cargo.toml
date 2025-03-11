@@ -1,0 +1,18 @@
+[package]
+name = "rsweb-app"
+version.workspace = true
+edition = "2024"
+publish = false
+
+[dependencies]
+warp.workspace = true
+maud = "0.27.0"
+rsweb-auth.workspace = true
+rsweb-database.workspace = true
+rsweb-utils.workspace = true
+pulldown-cmark = "0.13.0"
+serde_yaml_ng = "0.10.0"
+serde.workspace = true
+tokio.workspace = true
+chrono = "0.4.39"
+http.workspace = true

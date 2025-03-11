@@ -1,0 +1,7 @@
+/target
+.env
+.private
+.idea/
+*.pem
+*.key
+.vscode/

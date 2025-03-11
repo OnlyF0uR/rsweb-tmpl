@@ -1,0 +1,17 @@
+[package]
+name = "populate"
+edition = "2024"
+version.workspace = true
+publish = false
+
+
+[dependencies]
+tokio.workspace = true
+rsweb-database.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sqlx.workspace = true
+clap = { version = "4.5.20", features = ["derive"] }
+dotenvy.workspace = true
+time-macros = "0.2.19"
+time = "0.3.37"

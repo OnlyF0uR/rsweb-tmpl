@@ -1,0 +1,60 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/rsweb-app",
+    "crates/rsweb-api",
+    "crates/rsweb-auth",
+    "crates/rsweb-cache",
+    "crates/rsweb-database",
+    "crates/rsweb-utils",
+    "crates/rsweb-crypto",
+    "crates/google-jwt",
+    "stack",
+    "populate",
+]
+
+[workspace.package]
+version = "0.1.0"
+
+[profile.release]
+debug = 1
+split-debuginfo = 'packed'
+strip = 'debuginfo'
+panic = 'abort'
+
+[profile.release-dbgsym]
+inherits = "release"
+split-debuginfo = 'off'
+strip = 'none'
+
+[profile.bench]
+strip = 'none'
+
+[workspace.dependencies]
+tokio = { version = "1.43.0", features = ["full"] }
+warp = { version = "0.3.7", features = ["tls"] }
+http = "1.2.0"
+futures-util = "0.3.31"
+base64 = "0.22.1"
+serde_json = "1.0.138"
+serde = { version = "1.0.217", features = ["derive"] }
+dotenvy = "0.15.7"
+sqlx = { version = "0.8.3", features = [
+    "postgres",
+    "runtime-tokio-native-tls",
+    "time",
+    "macros",
+] }
+deadpool-redis = "0.19.0"
+time = { version = "0.3.37", features = ["serde"] }
+reqwest = { version = "0.12.12", features = ["multipart", "json"] }
+futures = "0.3.31"
+bytes = "1.10.0"
+rsweb-app = { path = "crates/rsweb-app" }
+rsweb-api = { path = "crates/rsweb-api" }
+rsweb-auth = { path = "crates/rsweb-auth" }
+rsweb-cache = { path = "crates/rsweb-cache" }
+rsweb-database = { path = "crates/rsweb-database" }
+rsweb-utils = { path = "crates/rsweb-utils" }
+rsweb-crypto = { path = "crates/rsweb-crypto" }
+google-jwt = { path = "crates/google-jwt" }

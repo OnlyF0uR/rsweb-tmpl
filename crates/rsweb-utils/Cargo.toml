@@ -1,0 +1,9 @@
+[package]
+name = "rsweb-utils"
+version.workspace = true
+edition = "2024"
+publish = false
+
+[dependencies]
+time.workspace = true
+sqlx.workspace = true

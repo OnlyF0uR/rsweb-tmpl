@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "email": "admin@example.com",
+      "handle": "admin",
+      "gender": "male",
+      "dob": "2000-01-01",
+      "role": "admin",
+      "google_sub": "<google_sub>"
+    }
+  ]
+}
