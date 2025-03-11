@@ -228,8 +228,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Handle back/forward navigation
   window.addEventListener("popstate", (e) => {
-    if (e.state && e.state.path) {
-      navigate(e.state.path, { pushState: false });
+    const path = e.currentTarget.history.state.path;
+    if (path) {
+      navigate(path, { pushState: false });
     }
   });
 
