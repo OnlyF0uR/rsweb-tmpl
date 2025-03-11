@@ -93,7 +93,7 @@ pub fn ext_from_mime_type(mime_type: &str) -> Option<&str> {
         "video/webm" => Some("webm"),
         "video/ogg" => Some("ogv"),
         "video/avi" => Some("avi"),
-        _ => return None,
+        _ => None,
     }
 }
 
