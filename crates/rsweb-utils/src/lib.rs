@@ -100,9 +100,7 @@ pub fn ext_from_mime_type(mime_type: &str) -> Option<&str> {
 pub fn time_ago(datetime: &PrimitiveDateTime) -> String {
     let system_time = datetime.assume_utc().into();
     let now = SystemTime::now();
-    let duration = now
-        .duration_since(system_time)
-        .unwrap_or_else(|_| Duration::ZERO);
+    let duration = now.duration_since(system_time).unwrap_or(Duration::ZERO);
 
     let total_secs = duration.as_secs();
 
