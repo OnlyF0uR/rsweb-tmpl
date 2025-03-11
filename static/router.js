@@ -158,6 +158,10 @@ document.addEventListener("DOMContentLoaded", () => {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
 
+          if (response.redirected) {
+            path = response.url.replace(window.location.origin, "");
+          }
+
           const html = await response.text();
           newDoc = new DOMParser().parseFromString(html, "text/html");
 
@@ -191,7 +195,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (pushState) {
         window.history.pushState({ path }, "", path);
       }
-
       document.dispatchEvent(
         new CustomEvent("navigation", {
           detail: { path, success: true },

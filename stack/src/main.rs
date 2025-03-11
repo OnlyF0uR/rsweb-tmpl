@@ -54,12 +54,12 @@ async fn handle_rejection(
     // App
     if err.find::<rsweb_app::filters::Unauthorized>().is_some() {
         // FIX: This redirect does not seem to actually do anything
-        r = Box::new(warp::redirect::temporary(warp::http::Uri::from_static(
+        r = Box::new(warp::redirect::see_other(warp::http::Uri::from_static(
             "/login",
         )));
     } else if err.find::<rsweb_app::filters::Authorized>().is_some() {
         // FIX: This redirect does not seem to actually do anything
-        r = Box::new(warp::redirect::temporary(warp::http::Uri::from_static("/")));
+        r = Box::new(warp::redirect::see_other(warp::http::Uri::from_static("/")));
     }
     // Api
     if err

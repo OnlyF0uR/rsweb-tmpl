@@ -270,10 +270,10 @@ pub fn render() -> Markup {
           script type="text/javascript" data-dynamic {
             r#"
                     // Constant for the current login display (login vs. register)
-                    let showLogin = true;
+                    window.showLogin = true;
 
                     // Function to toggle between login and register
-                    function toggleLogin() {
+                    window.toggleLogin = async function(response) {
                         showLogin = !showLogin;
 
                         // Change the image in the left div to /static/images/signup.jpg
