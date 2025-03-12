@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const pageCache = new Map();
   let isNavigating = false;
 
+  // Store the initial url for proper handling of root navigation
+  const initialUrl = window.location.pathname;
+
   function updateTitle(newDoc) {
     const newTitle = newDoc.querySelector("title");
     if (newTitle) {
@@ -131,9 +134,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  async function navigate(path, { pushState = true } = {}) {
-    if (isNavigating) return;
+  async function navigate(
+    path,
+    { pushState = true, replaceState = false } = {},
+  ) {
+    if (isNavigating) return false;
     isNavigating = true;
+
+    // Normalize the path
+    if (!path.startsWith("/")) {
+      path = "/" + path;
+    }
 
     try {
       // Check cache first
@@ -192,14 +203,26 @@ document.addEventListener("DOMContentLoaded", () => {
       // Load scripts
       await updateDynamicScripts(newDoc);
 
+      // Create a more detailed state object
+      const state = {
+        path: path,
+        title: document.title,
+        timestamp: Date.now(),
+      };
+
       if (pushState) {
-        window.history.pushState({ path }, "", path);
+        window.history.pushState(state, document.title, path);
+      } else if (replaceState) {
+        window.history.replaceState(state, document.title, path);
       }
+
       document.dispatchEvent(
         new CustomEvent("navigation", {
-          detail: { path, success: true },
+          detail: { path, success: true, state },
         }),
       );
+
+      return true;
     } catch (error) {
       console.error("Navigation error:", error);
       document.dispatchEvent(
@@ -207,6 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
           detail: { path, success: false, error },
         }),
       );
+      return false;
     } finally {
       isNavigating = false;
     }
@@ -228,12 +252,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Handle back/forward navigation
   window.addEventListener("popstate", (e) => {
-    const path = e.currentTarget.history.state.path;
-    if (path) {
-      navigate(path, { pushState: false });
+    const state = e.state;
+    let targetPath;
+
+    if (state && state.path) {
+      targetPath = state.path;
+    } else {
+      // Handle null state (usually the initial page)
+      targetPath = window.location.pathname;
     }
+
+    navigate(targetPath, { pushState: false });
   });
 
+  // Initialize history state for the initial page
+  const initialState = {
+    path: initialUrl,
+    title: document.title,
+    timestamp: Date.now(),
+  };
+
+  // Replace the current history entry with our enhanced state
+  window.history.replaceState(initialState, document.title, initialUrl);
+
   // Cache the initial page
-  pageCache.set(window.location.pathname, document.cloneNode(true));
+  pageCache.set(initialUrl, document.cloneNode(true));
 });
