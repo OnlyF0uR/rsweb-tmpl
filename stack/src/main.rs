@@ -24,14 +24,19 @@ async fn main() {
     // Combine routes
     let routes = app_routes.or(api_routes).recover(handle_rejection);
 
-    // Start server
-    println!("Listening on https://localhost:{}", PORT);
-    warp::serve(routes)
-        .tls()
-        .cert_path("cert.pem")
-        .key_path("cert.key")
-        .run(([127, 0, 0, 1], PORT))
-        .await;
+    let run_https = std::env::var("HTTPS").unwrap_or("false".to_string()) == "true";
+    if run_https {
+        println!("Listening on https://localhost:{}", PORT);
+        warp::serve(routes)
+            .tls()
+            .cert_path("cert.pem")
+            .key_path("cert.key")
+            .run(([127, 0, 0, 1], PORT))
+            .await;
+    } else {
+        println!("Listening on http://localhost:{}", PORT);
+        warp::serve(routes).run(([127, 0, 0, 1], PORT)).await;
+    }
 }
 
 async fn handle_rejection(
