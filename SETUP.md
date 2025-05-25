@@ -1,7 +1,7 @@
 # Setup
 
 ### Certificate
-Either use a self-signed certificate or a certificate from a trusted CA. For the certificate both the key (cert.key) and the certificate (cert.pem) should be in the root directory.
+When using HTTPS=true in the .env, Either use a self-signed certificate or a certificate from a trusted CA. For the certificate both the key (cert.key) and the certificate (cert.pem) should be in the root directory.
 
 ### Database & Cache
 
@@ -23,6 +23,7 @@ So that there actually is a database to connect to and so that sqlx does not com
 Create a `.env` file in the root directory with the following content:
 
 ```env
+HTTPS=false
 DATABASE_URL=postgres://<username>:<password>@127.0.0.1:5432/<db_name>
 REDIS_URL=redis://127.0.0.1:6379
 GOOGLE_OAUTH_CLIENT_ID=<google_client_id>
