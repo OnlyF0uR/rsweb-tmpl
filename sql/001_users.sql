@@ -49,10 +49,3 @@ CREATE TRIGGER trigger_update_users_timestamp
 BEFORE UPDATE ON users
 FOR EACH ROW
 EXECUTE FUNCTION update_timestamp();
-
-CREATE TABLE IF NOT EXISTS users_preferences (
-    id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    category_id INT NOT NULL,
-    value FLOAT NOT NULL
-);
